@@ -1,0 +1,16 @@
+{
+  "name": "test_klaw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dustin Pfister",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.16.0",
+    "klaw": "^2.1.1",
+    "through2": "^2.0.3"
+  }
+}
