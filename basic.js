@@ -1,9 +1,22 @@
-let klaw = require('klaw');
+let klaw = require('klaw'),
+path = require('path'),
 
-klaw('../blog_posts/_posts')
+// the dir to walk
+dir_walk = process.argv[2] || process.cwd();
+
+
+klaw(dir_walk, {
+
+    depthLimit: 0, // what is only at root
+
+})
 
 .on('data', function (item) {
 
-    console.log(item);
+    if (!item.stats.isDirectory()) {
+
+        console.log(path.basename(item.path));
+
+    }
 
 });
