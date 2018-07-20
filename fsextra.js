@@ -1,4 +1,5 @@
 let klaw = require('klaw'),
+fs = require('fs-extra'),
 path = require('path'),
 
 // the dir to walk
@@ -8,25 +9,23 @@ dir_walk = process.argv[2] || process.cwd();
 klaw(dir_walk, {
 
     // default to full recursion, if now depth is given
-    depthLimit: process.argv[3] || -1
+    depthLimit: process.argv[3] || -1,
+    fs: fs
 
 })
 
 // for each item
 .on('data', function (item) {
 
-    if (!item.stats.isDirectory()) {
+    //now using fs-extra in place of graceful-fs
+    this.fs.readFile(item.path).then(function (data) {
 
-        console.log(path.basename(item.path));
+        console.log(data.toString());
 
-    }
+    }).catch (function (e) {
 
-})
+        console.log(e.message);
 
-// when the walk is over
-.on('end', function () {
-
-    console.log('');
-    console.log('the walk is over');
+    })
 
 });

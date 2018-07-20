@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.16.0",
+    "fs-extra": "^7.0.0",
     "klaw": "^2.1.1",
     "through2": "^2.0.3"
   }
