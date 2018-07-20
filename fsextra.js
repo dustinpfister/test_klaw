@@ -1,5 +1,4 @@
 let klaw = require('klaw'),
-fs = require('fs-extra'),
 path = require('path'),
 
 // the dir to walk
@@ -10,14 +9,15 @@ klaw(dir_walk, {
 
     // default to full recursion, if now depth is given
     depthLimit: process.argv[3] || -1,
-    fs: fs
+    fs: require('fs-extra') // using fs-extra as the fs module
 
 })
 
 // for each item
 .on('data', function (item) {
 
-    //now using fs-extra in place of graceful-fs
+    // now using fs-extra in place of graceful-fs
+    // So now I can use promises
     this.fs.readFile(item.path).then(function (data) {
 
         console.log(data.toString());
@@ -26,6 +26,6 @@ klaw(dir_walk, {
 
         console.log(e.message);
 
-    })
+    });
 
 });
