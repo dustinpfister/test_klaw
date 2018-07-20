@@ -35,10 +35,14 @@ klaw(dir_walk)
 
             let $ = cheerio.load(html);
 
-            console.log($('title').text());
-
+            // if it is an article
             if ($('meta[content="article"]').length) {
 
+                // title, and paragraph text
+                item.title = $('title').text();
+                item.text_p = $('.article-inner>>p').text();
+
+                // push the item
                 stream.push(item);
 
             }
@@ -54,9 +58,12 @@ klaw(dir_walk)
 
     }))
 
-// for each item that remains
+// for each article
 .on('data', function (item) {
 
-    console.log(item.path);
+    console.log('********** ********** **********');
+    console.log(item.title);
+    console.log(item.text);
+    console.log('********** ********** **********');
 
 });
