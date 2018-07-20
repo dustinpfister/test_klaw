@@ -5,6 +5,7 @@ dir_walk = process.argv[2] || process.cwd();
 
 klaw(dir_walk)
 
+// using stream.Transform in objectMode
 .pipe(new stream.Transform({
 
         objectMode: true,
@@ -22,6 +23,7 @@ klaw(dir_walk)
 
     }))
 
+// the filtered list of items
 .on('data', function (item) {
 
     console.log(item.path);
